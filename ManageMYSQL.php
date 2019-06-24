@@ -1,15 +1,10 @@
-<?php
-abstract class TableKeys{
-    const tableKeys = ["profile"=>[
-        "id","name","surname","telephone","city","district","address","bday","gender"
-    ]];
-} 
+<?php 
 Class ManageMYSQL extends Export{
-    public function __construct(){
-        $this->host = "localhost";
-        $this->username = "root";
-        $this->password = "root";
-        $this->db = "shopilfy";
+    public function __construct($host,$username,$password,$db){
+        $this->host = $host;
+        $this->username = $username;
+        $this->password = $password;
+        $this->db = $db;
     }
     public function connect(){
         $conn_str = 'mysql:host='.$this->host.';dbname='.$this->db;
@@ -122,7 +117,7 @@ Class ManageMYSQL extends Export{
         $length_values_str = count($values);
         if($length_keys_str == $length_values_str){
         for($i = 0; $i < $length_keys_str; $i++){
-            if($i == 0 && $length_keys_str != 1){
+            if($i == 0){
                 $update_str = $keys[$i]." = '".$values[$i]."', ";
             }else if($i == $length_keys_str-1){
                 $update_str = $update_str.$keys[$i]." = '".$values[$i]."'";
@@ -131,7 +126,6 @@ Class ManageMYSQL extends Export{
             }
         }
         $sql = "UPDATE ".$table." SET ".$update_str." WHERE ".$where_str.";";
-        echo $sql;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         if($error == "show"){
@@ -319,4 +313,5 @@ Class Export{
          fclose($output);
      }
 }
+
 ?>

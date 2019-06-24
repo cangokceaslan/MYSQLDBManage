@@ -1,14 +1,9 @@
 <?php 
 require('./ManageMYSQL.php');
 abstract Class TableNames{
-    const tables = array("person","products","images");
-    const table_keys = array(
-        "person"=>["id","name","surname","number","date"],
-        "products"=>["id","name","price","image","description","stock","color"],
-        "images"=>["id","iimage","ikey"]
-    );
+
 }
-$manage = new ManageMYSQL("127.0.0.1:3306","root","root","example");
+//$manage = new ManageMYSQL("127.0.0.1:3306","root","root","example");
 // $checkConnection = $manage->check_connection(Types::SHOW_ERROR);
 // $sql = "INSERT INTO person(id,name,surname,number,date) VALUES (21,'Can','Gokceaslan','05444850586','2019-09-12');";
 // $inner_join = $manage->inner_join(TableNames::tables[2],"product_id",TableNames::tables[1],"id");
