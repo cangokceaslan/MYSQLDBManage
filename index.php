@@ -1,10 +1,20 @@
 <?php 
-require('./ManageMYSQL.php');
+require('./src/ManageMYSQL.php');
 abstract Class TableNames{
 
 }
-//$manage = new ManageMYSQL("127.0.0.1:3306","root","root","example");
-// $checkConnection = $manage->check_connection(Types::SHOW_ERROR);
+$manage = new ManageMYSQL("127.0.0.1:3306","root","root","example");
+//$checkConnection = $manage->check_connection(Types::SHOW_ERROR);
+if($manage->checkTable("image")){
+
+}else{
+    $json = array(
+        "columns"=>["id","name","can"],
+        "types"=>["int","varchar(255)","varchar(255)"],
+        "keys"=>["NOT NULL UNIQUE AUTO_INCREMENT","NOT NULL",""]
+    );
+    $manage->createTable("image8",$json);
+}
 // $sql = "INSERT INTO person(id,name,surname,number,date) VALUES (21,'Can','Gokceaslan','05444850586','2019-09-12');";
 // $inner_join = $manage->inner_join(TableNames::tables[2],"product_id",TableNames::tables[1],"id");
 // $sql = "SELECT * FROM person WHERE 1";

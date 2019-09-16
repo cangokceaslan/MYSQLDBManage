@@ -35,6 +35,45 @@ Class ManageMYSQL extends Export{
             }
         }
     }
+    public function checkTable($table){
+        $sql = "SHOW TABLES LIKE '$table'";
+        $conn = $this->connect();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $conn = null;
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if($data != null){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    public function createTable($name,$info){
+        $columns = $info["columns"];
+        $types = $info["types"];
+        $keys = $info["keys"];
+        $len = count($columns);
+        $tableStr = "";
+        for($i = 0; $i < $len; $i++){
+            if($i == $len-1){
+                $tableStr .= $columns[$i]." ".$types[$i]." ".$keys[$i];
+            }else{
+                $tableStr .= $columns[$i]." ".$types[$i]." ".$keys[$i].",";
+            }
+        }
+        $sql = "CREATE TABLE $name ($tableStr)";
+        $conn = $this->connect();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        var_dump($data);
+        if($data != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function preventAttacks($data){
         $finished = [];
         $temp = "";
