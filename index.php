@@ -1,9 +1,9 @@
 <?php 
-require('./src/ManageMYSQL.php');
+require('./src/MYSQLDBManage.php');
 abstract Class TableNames{
 
 }
-$manage = new ManageMYSQL("127.0.0.1:3306","root","root","example");
+$manage = new MYSQLDBManage("127.0.0.1:3306","root","root","example");
 //$checkConnection = $manage->check_connection(Types::SHOW_ERROR);
 if($manage->checkTable("image")){
 

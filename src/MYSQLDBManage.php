@@ -1,5 +1,5 @@
 <?php 
-Class ManageMYSQL extends Export{
+Class MYSQLDBManage extends Export{
     public function __construct($host,$username,$password,$db){
         $this->host = $host;
         $this->username = $username;
@@ -66,8 +66,7 @@ Class ManageMYSQL extends Export{
         $conn = $this->connect();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        var_dump($data);
+        $data = $count = $stmt->rowCount();
         if($data != null){
             return true;
         }else{
